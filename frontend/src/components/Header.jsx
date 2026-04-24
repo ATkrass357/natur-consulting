@@ -52,16 +52,6 @@ export const Header = () => {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
-          <Link
-            to="/registrierung/angestellte"
-            data-testid="header-cta-registrieren"
-            className="inline-block bg-[#9C462C] hover:bg-[#7A3622] text-white px-6 py-3 text-sm font-medium tracking-wide transition-colors"
-          >
-            Jetzt bewerben
-          </Link>
-        </div>
-
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -90,14 +80,6 @@ export const Header = () => {
                 {n.label}
               </NavLink>
             ))}
-            <Link
-              to="/registrierung/angestellte"
-              onClick={() => setOpen(false)}
-              data-testid="mobile-cta-registrieren"
-              className="mt-2 bg-[#9C462C] text-white px-6 py-3 text-sm font-medium tracking-wide text-center"
-            >
-              Jetzt bewerben
-            </Link>
           </div>
         </div>
       )}
