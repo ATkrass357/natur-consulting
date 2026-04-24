@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { Logo } from "./Logo";
 
 export const Footer = () => {
@@ -24,7 +24,6 @@ export const Footer = () => {
           </p>
           <div className="mt-8 space-y-3 text-sm">
             <div className="flex gap-3 items-start"><MapPin size={16} className="mt-0.5 text-[#9C462C]" /><span>Pamplonastraße 19<br/>33106 Paderborn</span></div>
-            <div className="flex gap-3 items-center"><Phone size={16} className="text-[#9C462C]" /><span>+49 (0) 5251 – 000 000</span></div>
             <div className="flex gap-3 items-center"><Mail size={16} className="text-[#9C462C]" /><span>info@ecoprotec.de</span></div>
           </div>
         </div>
@@ -49,7 +48,7 @@ export const Footer = () => {
           </ul>
           <div className="font-label text-xs text-[#9C462C] mb-4 mt-10">Register</div>
           <p className="text-xs leading-relaxed text-[#A9B1AA]">
-            HRB 3625<br/>Amtsgericht Paderborn<br/>USt-IdNr. DE 812996130
+            HRB 3625<br/>Amtsgericht Paderborn
           </p>
         </div>
       </div>

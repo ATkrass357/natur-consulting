@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "sonner";
-import { Mail, MapPin, Phone, Loader2 } from "lucide-react";
+import { Mail, MapPin, Loader2 } from "lucide-react";
 import { api } from "../lib/api";
 
 const init = { name: "", email: "", telefon: "", unternehmen: "", betreff: "", nachricht: "", datenschutz: false };
@@ -40,10 +40,6 @@ export default function Kontakt() {
           <div>
             <div className="font-label text-xs text-[#9C462C]">Adresse</div>
             <div className="mt-3 flex gap-3 items-start"><MapPin size={18} className="text-[#1B3B22] mt-0.5" /><span>ecoprotec GmbH<br/>Pamplonastraße 19<br/>33106 Paderborn</span></div>
-          </div>
-          <div>
-            <div className="font-label text-xs text-[#9C462C]">Telefon</div>
-            <div className="mt-3 flex gap-3 items-center"><Phone size={18} className="text-[#1B3B22]" /><span>+49 (0) 5251 – 000 000</span></div>
           </div>
           <div>
             <div className="font-label text-xs text-[#9C462C]">E-Mail</div>

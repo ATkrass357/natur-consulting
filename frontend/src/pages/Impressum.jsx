@@ -25,7 +25,6 @@ export default function Impressum() {
         <section>
           <h2 className="font-heading text-2xl text-[#1A221C]">Kontakt</h2>
           <p className="mt-4">
-            Telefon: +49 (0) 5251 – 000 000<br/>
             E-Mail: info@ecoprotec.de
           </p>
         </section>
@@ -35,14 +34,6 @@ export default function Impressum() {
           <p className="mt-4">
             Handelsregister: HRB 3625<br/>
             Registergericht: Amtsgericht Paderborn
-          </p>
-        </section>
-
-        <section>
-          <h2 className="font-heading text-2xl text-[#1A221C]">Umsatzsteuer-ID</h2>
-          <p className="mt-4">
-            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br/>
-            <strong>DE 812996130</strong>
           </p>
         </section>
 
