@@ -1,14 +1,15 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from pydantic import BaseModel, Field, EmailStr
+from typing import Optional
 import uuid
 from datetime import datetime, timezone
+import httpx
 
 
 ROOT_DIR = Path(__file__).parent
@@ -19,52 +20,157 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
+# Telegram config
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '').strip()
+TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '').strip()
+
 # Create the main app without a prefix
-app = FastAPI()
+app = FastAPI(title="Ecosafe / ecoprotec GmbH API")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
 
-# Define Models
-class StatusCheck(BaseModel):
-    model_config = ConfigDict(extra="ignore")  # Ignore MongoDB's _id field
-    
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+# -------- Models --------
+class EmployeeApplication(BaseModel):
+    vorname: str = Field(min_length=1, max_length=120)
+    nachname: str = Field(min_length=1, max_length=120)
+    email: EmailStr
+    telefon: str = Field(min_length=3, max_length=40)
+    geburtsdatum: Optional[str] = None
+    adresse: Optional[str] = None
+    position: str = Field(min_length=1, max_length=160)
+    erfahrung: Optional[str] = None
+    qualifikationen: Optional[str] = None
+    verfuegbarkeit: Optional[str] = None
+    gehaltsvorstellung: Optional[str] = None
+    motivation: Optional[str] = None
+    datenschutz: bool = True
 
-class StatusCheckCreate(BaseModel):
-    client_name: str
 
-# Add your routes to the router instead of directly to app
+class ContactMessage(BaseModel):
+    name: str = Field(min_length=1, max_length=160)
+    email: EmailStr
+    telefon: Optional[str] = None
+    unternehmen: Optional[str] = None
+    betreff: str = Field(min_length=1, max_length=200)
+    nachricht: str = Field(min_length=1, max_length=4000)
+    datenschutz: bool = True
+
+
+# -------- Helpers --------
+def _escape_html(text: str) -> str:
+    if text is None:
+        return "-"
+    return (
+        str(text)
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+    )
+
+
+async def send_telegram(message_html: str) -> dict:
+    """Send a message to Telegram. If token/chat_id missing, returns skipped=True."""
+    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
+        logger.warning("Telegram not configured (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID missing). Skipping send.")
+        return {"sent": False, "skipped": True, "reason": "telegram_not_configured"}
+
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": message_html,
+        "parse_mode": "HTML",
+        "disable_web_page_preview": True,
+    }
+    try:
+        async with httpx.AsyncClient(timeout=15.0) as hc:
+            r = await hc.post(url, json=payload)
+            if r.status_code >= 400:
+                logger.error(f"Telegram error {r.status_code}: {r.text}")
+                return {"sent": False, "skipped": False, "error": r.text}
+            return {"sent": True, "skipped": False}
+    except Exception as e:
+        logger.exception("Telegram send failed")
+        return {"sent": False, "skipped": False, "error": str(e)}
+
+
+# -------- Routes --------
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"service": "ecoprotec GmbH API", "status": "ok"}
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.model_dump()
-    status_obj = StatusCheck(**status_dict)
-    
-    # Convert to dict and serialize datetime to ISO string for MongoDB
-    doc = status_obj.model_dump()
-    doc['timestamp'] = doc['timestamp'].isoformat()
-    
-    _ = await db.status_checks.insert_one(doc)
-    return status_obj
 
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
-    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
-    
-    # Convert ISO string timestamps back to datetime objects
-    for check in status_checks:
-        if isinstance(check['timestamp'], str):
-            check['timestamp'] = datetime.fromisoformat(check['timestamp'])
-    
-    return status_checks
+@api_router.get("/health")
+async def health():
+    return {
+        "status": "ok",
+        "telegram_configured": bool(TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID),
+    }
+
+
+@api_router.post("/registrierung/angestellte")
+async def employee_registration(payload: EmployeeApplication):
+    doc_id = str(uuid.uuid4())
+    created = datetime.now(timezone.utc).isoformat()
+
+    doc = payload.model_dump()
+    doc["id"] = doc_id
+    doc["created_at"] = created
+    doc["type"] = "employee_application"
+
+    await db.employee_applications.insert_one(doc)
+
+    msg = (
+        "<b>🌿 Neue Mitarbeiter-Registrierung</b>\n"
+        f"<b>Position:</b> {_escape_html(payload.position)}\n"
+        "— — — — — — — — — —\n"
+        f"<b>Name:</b> {_escape_html(payload.vorname)} {_escape_html(payload.nachname)}\n"
+        f"<b>E-Mail:</b> {_escape_html(payload.email)}\n"
+        f"<b>Telefon:</b> {_escape_html(payload.telefon)}\n"
+        f"<b>Geburtsdatum:</b> {_escape_html(payload.geburtsdatum)}\n"
+        f"<b>Adresse:</b> {_escape_html(payload.adresse)}\n"
+        f"<b>Verfügbarkeit:</b> {_escape_html(payload.verfuegbarkeit)}\n"
+        f"<b>Gehaltsvorstellung:</b> {_escape_html(payload.gehaltsvorstellung)}\n"
+        "— — — — — — — — — —\n"
+        f"<b>Erfahrung:</b>\n{_escape_html(payload.erfahrung)}\n\n"
+        f"<b>Qualifikationen:</b>\n{_escape_html(payload.qualifikationen)}\n\n"
+        f"<b>Motivation:</b>\n{_escape_html(payload.motivation)}\n\n"
+        f"<i>ID: {doc_id} · {created}</i>"
+    )
+
+    tg = await send_telegram(msg)
+    return {"ok": True, "id": doc_id, "telegram": tg}
+
+
+@api_router.post("/kontakt")
+async def contact(payload: ContactMessage):
+    doc_id = str(uuid.uuid4())
+    created = datetime.now(timezone.utc).isoformat()
+
+    doc = payload.model_dump()
+    doc["id"] = doc_id
+    doc["created_at"] = created
+    doc["type"] = "contact_message"
+
+    await db.contact_messages.insert_one(doc)
+
+    msg = (
+        "<b>📬 Neue Kontaktanfrage</b>\n"
+        f"<b>Betreff:</b> {_escape_html(payload.betreff)}\n"
+        "— — — — — — — — — —\n"
+        f"<b>Name:</b> {_escape_html(payload.name)}\n"
+        f"<b>E-Mail:</b> {_escape_html(payload.email)}\n"
+        f"<b>Telefon:</b> {_escape_html(payload.telefon)}\n"
+        f"<b>Unternehmen:</b> {_escape_html(payload.unternehmen)}\n"
+        "— — — — — — — — — —\n"
+        f"<b>Nachricht:</b>\n{_escape_html(payload.nachricht)}\n\n"
+        f"<i>ID: {doc_id} · {created}</i>"
+    )
+
+    tg = await send_telegram(msg)
+    return {"ok": True, "id": doc_id, "telegram": tg}
+
 
 # Include the router in the main app
 app.include_router(api_router)
@@ -83,6 +189,7 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
