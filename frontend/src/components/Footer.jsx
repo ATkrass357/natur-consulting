@@ -20,7 +20,7 @@ export const Footer = () => {
             </div>
           </div>
           <p className="mt-6 max-w-md text-sm leading-relaxed text-[#A9B1AA]">
-            Premium Umweltberatung für Unternehmen seit über zwei Jahrzehnten. Wir verbinden ökologische Verantwortung mit wirtschaftlicher Exzellenz.
+            Premium Umweltberatung für Unternehmen. Wir verbinden ökologische Verantwortung mit wirtschaftlicher Exzellenz.
           </p>
           <div className="mt-8 space-y-3 text-sm">
             <div className="flex gap-3 items-start"><MapPin size={16} className="mt-0.5 text-[#9C462C]" /><span>Pamplonastraße 19<br/>33106 Paderborn</span></div>
