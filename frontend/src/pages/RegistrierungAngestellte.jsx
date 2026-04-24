@@ -175,35 +175,3 @@ const Field = ({ label, required, children }) => (
     {children}
   </label>
 );
-  padding: 14px 16px;
-          color: #1A221C;
-          font-family: 'Work Sans', sans-serif;
-          transition: border-color .15s, box-shadow .15s;
-          border-radius: 0;
-        }
-        .inp:focus {
-          outline: none;
-          border-color: #9C462C;
-          box-shadow: 0 0 0 3px rgba(156, 70, 44, 0.12);
-        }
-      `}</style>
-    </div>
-  );
-}
-
-const Block = ({ title, nr, children }) => (
-  <section className="space-y-6">
-    <div className="flex items-baseline gap-6 pb-2 border-b border-[#D8D4CC]">
-      <span className="font-accent text-3xl text-[#9C462C]">{nr}</span>
-      <h2 className="font-heading text-2xl font-medium text-[#1A221C]">{title}</h2>
-    </div>
-    {children}
-  </section>
-);
-
-const Field = ({ label, required, children }) => (
-  <label className="block">
-    <span className="font-label text-[11px] text-[#1A221C] mb-2 block">{label}{required && <span className="text-[#9C462C]"> *</span>}</span>
-    {children}
-  </label>
-);
