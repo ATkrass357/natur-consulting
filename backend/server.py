@@ -39,11 +39,8 @@ class EmployeeApplication(BaseModel):
     telefon: str = Field(min_length=3, max_length=40)
     geburtsdatum: Optional[str] = None
     adresse: Optional[str] = None
-    position: str = Field(min_length=1, max_length=160)
     erfahrung: Optional[str] = None
     qualifikationen: Optional[str] = None
-    verfuegbarkeit: Optional[str] = None
-    gehaltsvorstellung: Optional[str] = None
     motivation: Optional[str] = None
     datenschutz: bool = True
 
@@ -123,15 +120,12 @@ async def employee_registration(payload: EmployeeApplication):
 
     msg = (
         "<b>🌿 Neue Mitarbeiter-Registrierung</b>\n"
-        f"<b>Position:</b> {_escape_html(payload.position)}\n"
         "— — — — — — — — — —\n"
         f"<b>Name:</b> {_escape_html(payload.vorname)} {_escape_html(payload.nachname)}\n"
         f"<b>E-Mail:</b> {_escape_html(payload.email)}\n"
         f"<b>Telefon:</b> {_escape_html(payload.telefon)}\n"
         f"<b>Geburtsdatum:</b> {_escape_html(payload.geburtsdatum)}\n"
         f"<b>Adresse:</b> {_escape_html(payload.adresse)}\n"
-        f"<b>Verfügbarkeit:</b> {_escape_html(payload.verfuegbarkeit)}\n"
-        f"<b>Gehaltsvorstellung:</b> {_escape_html(payload.gehaltsvorstellung)}\n"
         "— — — — — — — — — —\n"
         f"<b>Erfahrung:</b>\n{_escape_html(payload.erfahrung)}\n\n"
         f"<b>Qualifikationen:</b>\n{_escape_html(payload.qualifikationen)}\n\n"

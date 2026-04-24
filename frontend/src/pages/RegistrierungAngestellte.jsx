@@ -13,35 +13,16 @@ const init = {
   telefon: "",
   geburtsdatum: "",
   adresse: "",
-  position: "",
   erfahrung: "",
   qualifikationen: "",
-  verfuegbarkeit: "",
-  gehaltsvorstellung: "",
   motivation: "",
   datenschutz: false,
 };
-
-const POSITIONEN = [
-  "Umweltgutachter:in",
-  "ESG-Berater:in",
-  "Sachverständige:r Altlasten",
-  "Werkstudent:in Umwelt",
-  "Projektassistenz",
-  "Initiativbewerbung",
-];
 
 export default function RegistrierungAngestellte() {
   const [form, setForm] = useState(init);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.state?.position) {
-      setForm((f) => ({ ...f, position: location.state.position }));
-    }
-  }, [location.state]);
 
   const set = (k) => (e) =>
     setForm((f) => ({ ...f, [k]: e.target.type === "checkbox" ? e.target.checked : e.target.value }));
@@ -123,24 +104,7 @@ export default function RegistrierungAngestellte() {
             </div>
           </Block>
 
-          <Block title="Position & Konditionen" nr="02">
-            <div className="grid md:grid-cols-2 gap-6">
-              <Field label="Gewünschte Position" required>
-                <select data-testid="r-position" required value={form.position} onChange={set("position")} className="inp bg-white">
-                  <option value="">Bitte wählen…</option>
-                  {POSITIONEN.map((p) => <option key={p} value={p}>{p}</option>)}
-                </select>
-              </Field>
-              <Field label="Frühester Eintritt">
-                <input data-testid="r-verfuegbarkeit" placeholder="z. B. 01.06.2026 oder sofort" value={form.verfuegbarkeit} onChange={set("verfuegbarkeit")} className="inp" />
-              </Field>
-              <Field label="Gehaltsvorstellung (brutto / Jahr)">
-                <input data-testid="r-gehalt" placeholder="z. B. 60.000 €" value={form.gehaltsvorstellung} onChange={set("gehaltsvorstellung")} className="inp" />
-              </Field>
-            </div>
-          </Block>
-
-          <Block title="Ihre Laufbahn" nr="03">
+          <Block title="Ihre Laufbahn" nr="02">
             <Field label="Berufserfahrung">
               <textarea data-testid="r-erfahrung" rows={5} value={form.erfahrung} onChange={set("erfahrung")} placeholder="Stationen, Jahre, Schwerpunkte…" className="inp" />
             </Field>
@@ -180,6 +144,38 @@ export default function RegistrierungAngestellte() {
           background: #FFFFFF;
           border: 1px solid #D8D4CC;
           padding: 14px 16px;
+          color: #1A221C;
+          font-family: 'Work Sans', sans-serif;
+          transition: border-color .15s, box-shadow .15s;
+          border-radius: 0;
+        }
+        .inp:focus {
+          outline: none;
+          border-color: #9C462C;
+          box-shadow: 0 0 0 3px rgba(156, 70, 44, 0.12);
+        }
+      `}</style>
+    </div>
+  );
+}
+
+const Block = ({ title, nr, children }) => (
+  <section className="space-y-6">
+    <div className="flex items-baseline gap-6 pb-2 border-b border-[#D8D4CC]">
+      <span className="font-accent text-3xl text-[#9C462C]">{nr}</span>
+      <h2 className="font-heading text-2xl font-medium text-[#1A221C]">{title}</h2>
+    </div>
+    {children}
+  </section>
+);
+
+const Field = ({ label, required, children }) => (
+  <label className="block">
+    <span className="font-label text-[11px] text-[#1A221C] mb-2 block">{label}{required && <span className="text-[#9C462C]"> *</span>}</span>
+    {children}
+  </label>
+);
+  padding: 14px 16px;
           color: #1A221C;
           font-family: 'Work Sans', sans-serif;
           transition: border-color .15s, box-shadow .15s;
