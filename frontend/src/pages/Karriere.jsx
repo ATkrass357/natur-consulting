@@ -48,7 +48,7 @@ export default function Karriere() {
           {STELLEN.map((s, i) => (
             <Link
               to="/registrierung/angestellte"
-              state={{ position: s.rolle }}
+              state={{ position: s.rolle.replace(" (m/w/d)", "") }}
               key={s.rolle}
               data-testid={`stelle-${i}`}
               className="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 hover:bg-[#EFECE5]/60 transition-colors group cursor-pointer px-4 -mx-4"
