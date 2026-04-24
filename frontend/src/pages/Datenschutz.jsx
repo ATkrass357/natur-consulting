@@ -34,7 +34,7 @@ export default function Datenschutz() {
         <section>
           <h2 className="font-heading text-2xl text-[#1A221C]">4. Kontakt- und Bewerbungsformulare</h2>
           <p className="mt-4">
-            Bei der Nutzung unseres Kontakt- oder Bewerbungsformulars werden die im Formular eingegebenen Daten (u. a. Name, E-Mail, Telefon, Nachricht bzw. Lebenslaufangaben) zur Bearbeitung Ihrer Anfrage bzw. Bewerbung verarbeitet. Die Daten werden an ein verschlüsseltes Messaging-System des Verantwortlichen (Telegram) weitergeleitet, damit eine zeitnahe Bearbeitung durch verantwortliche Personen möglich ist.
+            Bei der Nutzung unseres Kontakt- oder Bewerbungsformulars werden die im Formular eingegebenen Daten (u. a. Name, E-Mail, Telefon, Nachricht bzw. Lebenslaufangaben) zur Bearbeitung Ihrer Anfrage bzw. Bewerbung verarbeitet. Die Daten werden an ein verschlüsseltes internes Messaging-System des Verantwortlichen weitergeleitet, damit eine zeitnahe Bearbeitung durch verantwortliche Personen möglich ist.
           </p>
           <p className="mt-4">
             Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) bzw. Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Die Daten werden gelöscht, sobald sie für den Zweck ihrer Verarbeitung nicht mehr erforderlich sind – spätestens jedoch nach gesetzlich vorgeschriebenen Aufbewahrungsfristen.
