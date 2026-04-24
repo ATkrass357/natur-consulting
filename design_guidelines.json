@@ -1,0 +1,110 @@
+{
+  "theme": "light",
+  "archetype": "1_Organic_Earthy",
+  "brand_identity": {
+    "name": "Ecosafe (ecoprotec GmbH)",
+    "description": "Premium B2B Umweltberatung für Unternehmen",
+    "tone": "seriös, premium, naturfokussiert, vertrauenswürdig, deutsch",
+    "legal_info": {
+      "company": "ecoprotec GmbH",
+      "address": "Pamplonastraße 19, 33106 Paderborn",
+      "register": "Amtsgericht Paderborn HRB 3625",
+      "vat": "DE 812996130",
+      "ceo": "Markus Engemann"
+    }
+  },
+  "typography": {
+    "heading_font": "Outfit",
+    "body_font": "Work Sans",
+    "accent_font": "Cormorant Garamond",
+    "rules": {
+      "h1": "text-5xl lg:text-7xl tracking-tighter font-light text-[#1B221C]",
+      "h2": "text-4xl lg:text-5xl tracking-tight font-medium text-[#1B221C]",
+      "h3": "text-2xl lg:text-3xl font-medium text-[#2C332D]",
+      "body": "text-base lg:text-lg leading-relaxed text-[#414C45]",
+      "labels": "text-xs tracking-[0.2em] uppercase font-bold text-[#4A6B53]"
+    }
+  },
+  "color_palette": {
+    "background": {
+      "base": "#F8F7F4",
+      "surface": "#FFFFFF",
+      "muted": "#EFECE5"
+    },
+    "text": {
+      "primary": "#1A221C",
+      "secondary": "#414C45",
+      "muted": "#757F78"
+    },
+    "brand": {
+      "primary_green": "#1B3B22",
+      "moss_green": "#4A6B53",
+      "terracotta": "#9C462C"
+    },
+    "border": {
+      "default": "#D8D4CC",
+      "focus": "#9C462C"
+    }
+  },
+  "surfaces_and_spacing": {
+    "header": "backdrop-blur-xl bg-[#F8F7F4]/80 border-b border-[#1B3B22]/10",
+    "cards": "bg-[#FFFFFF] rounded-none border border-[#D8D4CC] p-8 md:p-12 shadow-sm transition-all hover:border-[#4A6B53] hover:-translate-y-1",
+    "spacing_scale": {
+      "section_y": "py-24 md:py-32",
+      "container": "max-w-7xl mx-auto px-6 md:px-12",
+      "grid_gap": "gap-8 md:gap-12"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#9C462C] hover:bg-[#7A3622] text-white rounded-none px-8 py-4 font-medium transition-colors",
+      "secondary": "bg-transparent border border-[#1B3B22] text-[#1B3B22] hover:bg-[#1B3B22] hover:text-[#F8F7F4] rounded-none px-8 py-4 font-medium transition-colors"
+    },
+    "forms": {
+      "input": "bg-[#FFFFFF] border-[#D8D4CC] text-[#1A221C] focus:ring-2 focus:ring-[#9C462C]/20 focus:border-[#9C462C] rounded-none p-4",
+      "label": "text-sm font-semibold text-[#1A221C] mb-2 block",
+      "container": "bg-[#FFFFFF] p-8 border border-[#D8D4CC]"
+    }
+  },
+  "media": {
+    "images": {
+      "hero_startseite": {
+        "url": "https://images.unsplash.com/photo-1767677505638-38c958c3e794?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJsZSUyMGFyY2hpdGVjdHVyZSUyMG1vZGVybiUyMGJ1aWxkaW5nJTIwbmF0dXJlfGVufDB8fHx8MTc3NzA2MDI4OXww&ixlib=rb-4.1.0&q=85",
+        "description": "Modern building surrounded by towering redwood trees",
+        "usage": "Hero section background on Startseite. Must use a bg-[#F8F7F4]/40 overlay to ensure text contrast."
+      },
+      "unternehmen_office": {
+        "url": "https://images.unsplash.com/photo-1772333388934-5de156928c0c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHw0fHxzdXN0YWluYWJsZSUyMGFyY2hpdGVjdHVyZSUyMG1vZGVybiUyMGJ1aWxkaW5nJTIwbmF0dXJlfGVufDB8fHx8MTc3NzA2MDI4OXww&ixlib=rb-4.1.0&q=85",
+        "description": "Modern buildings integrated with lush green plants",
+        "usage": "Image for 'Über uns' or 'Unternehmen' page showing sustainable architecture"
+      },
+      "markus_engemann_ceo": {
+        "url": "https://images.pexels.com/photos/28002663/pexels-photo-28002663.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Professional man in suit outdoors",
+        "usage": "Portrait of Geschäftsführer Markus Engemann on the Unternehmen page"
+      },
+      "leistungen_natur": {
+        "url": "https://images.unsplash.com/photo-1763376779670-3cc15c28713b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwyfHxsdXNoJTIwZ3JlZW4lMjBmb3Jlc3QlMjBzdW5saWdodHxlbnwwfHx8fDE3NzcwNjAyODh8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Macro shot of lush green moss and plants",
+        "usage": "Decorative element for the 'Leistungen' section to emphasize ecological focus"
+      },
+      "karriere_hero": {
+        "url": "https://images.pexels.com/photos/33288548/pexels-photo-33288548.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Sunlight filtering through tall pine trees and moss",
+        "usage": "Background or side panel for the '/registrierung/angestellte' form or 'Karriere' hero"
+      }
+    }
+  },
+  "instructions_to_main_agent": [
+    "DO NOT use Inter or Roboto. Integrate Outfit and Work Sans via standard imports or Google Fonts.",
+    "NO PURPLE/VIOLET Gradients. Adhere strictly to the defined earthy color palette (Waldgrün, Moos, Terracotta, Creme).",
+    "The Startseite must include Hero, Leistungs-Teaser, USPs, Kennzahlen, and CTA sections.",
+    "Required routes/pages: Startseite (/), Unternehmen (/unternehmen), Leistungen (/leistungen), Karriere (/karriere), Kontakt (/kontakt), Impressum (/impressum), Datenschutz (/datenschutz).",
+    "Create the specific route '/registrierung/angestellte' featuring a comprehensive, premium-styled application form.",
+    "The employee registration form must capture applicant details and simulate sending data to a Telegram Bot using backend logic. Read the Telegram Bot token from .env variables.",
+    "Footer must contain Impressum and Datenschutz links, along with company address (ecoprotec GmbH, Pamplonastraße 19, 33106 Paderborn, HRB 3625).",
+    "All interactive elements (buttons, links, form fields) must include a descriptive 'data-testid' attribute (e.g. data-testid='apply-submit-btn').",
+    "Implement 'The Bento Grid Protocol' for displaying services (Leistungen). Ensure generous internal padding (p-8 or p-12) for cards.",
+    "Header navigation must be sticky with the defined 'Crystal Glass' effect to remain visible but elegant."
+  ]
+}
