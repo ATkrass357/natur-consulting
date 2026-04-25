@@ -25,7 +25,7 @@ TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '').strip()
 TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '').strip()
 
 # Create the main app without a prefix
-app = FastAPI(title="Ecosafe / ecoprotec GmbH API")
+app = FastAPI(title="Natur Consulting / ecoprotec GmbH API")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")

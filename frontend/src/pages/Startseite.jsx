@@ -39,7 +39,7 @@ export default function Startseite() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 pt-32 md:pt-44 pb-28 md:pb-40">
-          <div className="font-label text-xs text-[#1B3B22] rise">Ecosafe · ecoprotec GmbH</div>
+          <div className="font-label text-xs text-[#1B3B22] rise">Natur Consulting · ecoprotec GmbH</div>
           <h1 className="font-heading text-5xl md:text-7xl lg:text-[88px] leading-[1.02] font-light text-[#1A221C] mt-6 max-w-5xl rise rise-1">
             Umwelt­beratung, die Unternehmen <span className="font-accent text-[#9C462C]">vorausdenkt.</span>
           </h1>
@@ -160,7 +160,7 @@ export default function Startseite() {
         </h2>
         <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
           <Link to="/kontakt" data-testid="cta-kontakt" className="bg-[#9C462C] hover:bg-[#7A3622] text-white px-10 py-5 text-sm font-medium tracking-wide transition-colors">Beratungstermin anfragen</Link>
-          <Link to="/karriere" data-testid="cta-karriere" className="border border-[#1B3B22] text-[#1B3B22] hover:bg-[#1B3B22] hover:text-[#F8F7F4] px-10 py-5 text-sm font-medium tracking-wide transition-colors">Karriere bei Ecosafe</Link>
+          <Link to="/karriere" data-testid="cta-karriere" className="border border-[#1B3B22] text-[#1B3B22] hover:bg-[#1B3B22] hover:text-[#F8F7F4] px-10 py-5 text-sm font-medium tracking-wide transition-colors">Karriere bei Natur Consulting</Link>
         </div>
       </section>
     </div>

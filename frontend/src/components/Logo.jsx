@@ -8,7 +8,7 @@ export const Logo = ({ className = "" }) => (
       <path d="M9 22C11 20 14 18.5 18 18" stroke="#9C462C" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
     <div className="leading-none">
-      <div className="font-heading text-lg font-medium tracking-tight text-[#1A221C]">Ecosafe</div>
+      <div className="font-heading text-lg font-medium tracking-tight text-[#1A221C]">Natur Consulting</div>
       <div className="font-label text-[10px] text-[#4A6B53]">ecoprotec GmbH</div>
     </div>
   </div>

@@ -71,7 +71,7 @@ export default function RegistrierungAngestellte() {
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-24">
           <div className="font-label text-xs text-[#EFECE5]">Registrierung · Angestellte</div>
           <h1 className="font-heading text-5xl md:text-7xl font-light leading-[1.04] mt-6 max-w-4xl text-[#F8F7F4]">
-            Werden Sie Teil der <span className="font-accent text-[#E5B79A]">Ecosafe</span>-Familie.
+            Werden Sie Teil der <span className="font-accent text-[#E5B79A]">Natur Consulting</span>-Familie.
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-[#D8D4CC] leading-relaxed">
             Füllen Sie das Formular vollständig aus – wir prüfen jede Bewerbung persönlich. Alle Angaben werden vertraulich behandelt.
@@ -112,7 +112,7 @@ export default function RegistrierungAngestellte() {
               <textarea data-testid="r-qualifikationen" rows={4} value={form.qualifikationen} onChange={set("qualifikationen")} placeholder="Studium, Zusatzausbildungen, Zertifikate…" className="inp" />
             </Field>
             <Field label="Motivation">
-              <textarea data-testid="r-motivation" rows={6} value={form.motivation} onChange={set("motivation")} placeholder="Warum Ecosafe? Was möchten Sie bewegen?" className="inp" />
+              <textarea data-testid="r-motivation" rows={6} value={form.motivation} onChange={set("motivation")} placeholder="Warum Natur Consulting? Was möchten Sie bewegen?" className="inp" />
             </Field>
           </Block>
 

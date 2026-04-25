@@ -68,7 +68,7 @@ export default function Karriere() {
       <section className="bg-[#EFECE5] py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="font-label text-xs text-[#4A6B53]">Benefits</div>
-          <h2 className="font-heading text-4xl md:text-5xl font-medium mt-4 text-[#1A221C]">Warum Ecosafe.</h2>
+          <h2 className="font-heading text-4xl md:text-5xl font-medium mt-4 text-[#1A221C]">Warum Natur Consulting.</h2>
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {BENEFITS.map(({ icon: Icon, t, d }, i) => (
               <div key={t} data-testid={`benefit-${i}`} className="bg-white border border-[#D8D4CC] p-10 hover:border-[#4A6B53] hover:-translate-y-1 transition-all">
