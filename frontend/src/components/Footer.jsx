@@ -24,7 +24,7 @@ export const Footer = () => {
           </p>
           <div className="mt-8 space-y-3 text-sm">
             <div className="flex gap-3 items-start"><MapPin size={16} className="mt-0.5 text-[#9C462C]" /><span>Pamplonastraße 19<br/>33106 Paderborn</span></div>
-            <div className="flex gap-3 items-center"><Mail size={16} className="text-[#9C462C]" /><span>info@ecoprotec.de</span></div>
+            <div className="flex gap-3 items-center"><Mail size={16} className="text-[#9C462C]" /><span>info@natur-consulting.de</span></div>
           </div>
         </div>
 

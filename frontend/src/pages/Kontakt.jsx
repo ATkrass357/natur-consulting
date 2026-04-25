@@ -43,7 +43,7 @@ export default function Kontakt() {
           </div>
           <div>
             <div className="font-label text-xs text-[#9C462C]">E-Mail</div>
-            <div className="mt-3 flex gap-3 items-center"><Mail size={18} className="text-[#1B3B22]" /><span>info@ecoprotec.de</span></div>
+            <div className="mt-3 flex gap-3 items-center"><Mail size={18} className="text-[#1B3B22]" /><span>info@natur-consulting.de</span></div>
           </div>
           <div>
             <div className="font-label text-xs text-[#9C462C]">Geschäftszeiten</div>

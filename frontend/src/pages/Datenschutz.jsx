@@ -13,7 +13,7 @@ export default function Datenschutz() {
             ecoprotec GmbH<br/>
             Pamplonastraße 19, 33106 Paderborn<br/>
             Vertreten durch den Geschäftsführer Markus Engemann<br/>
-            E-Mail: info@ecoprotec.de
+            E-Mail: info@natur-consulting.de
           </p>
         </section>
 

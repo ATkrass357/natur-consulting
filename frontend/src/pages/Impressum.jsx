@@ -25,7 +25,7 @@ export default function Impressum() {
         <section>
           <h2 className="font-heading text-2xl text-[#1A221C]">Kontakt</h2>
           <p className="mt-4">
-            E-Mail: info@ecoprotec.de
+            E-Mail: info@natur-consulting.de
           </p>
         </section>
 
