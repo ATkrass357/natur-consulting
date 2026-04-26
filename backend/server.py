@@ -116,7 +116,10 @@ async def employee_registration(payload: EmployeeApplication):
     doc["created_at"] = created
     doc["type"] = "employee_application"
 
-    await db.employee_applications.insert_one(doc)
+    try:
+        await db.employee_applications.insert_one(doc)
+    except Exception as e:
+        logger.warning(f"DB insert skipped (employee): {e}")
 
     msg = (
         "<b>🌿 Neue Mitarbeiter-Registrierung</b>\n"
@@ -147,7 +150,10 @@ async def contact(payload: ContactMessage):
     doc["created_at"] = created
     doc["type"] = "contact_message"
 
-    await db.contact_messages.insert_one(doc)
+    try:
+        await db.contact_messages.insert_one(doc)
+    except Exception as e:
+        logger.warning(f"DB insert skipped (contact): {e}")
 
     msg = (
         "<b>📬 Neue Kontaktanfrage</b>\n"
