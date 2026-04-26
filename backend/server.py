@@ -1,7 +1,6 @@
 from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
@@ -14,11 +13,6 @@ import httpx
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
-
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
 
 # Telegram config
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '').strip()
@@ -116,11 +110,6 @@ async def employee_registration(payload: EmployeeApplication):
     doc["created_at"] = created
     doc["type"] = "employee_application"
 
-    try:
-        await db.employee_applications.insert_one(doc)
-    except Exception as e:
-        logger.warning(f"DB insert skipped (employee): {e}")
-
     msg = (
         "<b>🌿 Neue Mitarbeiter-Registrierung</b>\n"
         "— — — — — — — — — —\n"
@@ -149,11 +138,6 @@ async def contact(payload: ContactMessage):
     doc["id"] = doc_id
     doc["created_at"] = created
     doc["type"] = "contact_message"
-
-    try:
-        await db.contact_messages.insert_one(doc)
-    except Exception as e:
-        logger.warning(f"DB insert skipped (contact): {e}")
 
     msg = (
         "<b>📬 Neue Kontaktanfrage</b>\n"
@@ -189,8 +173,3 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
-
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
